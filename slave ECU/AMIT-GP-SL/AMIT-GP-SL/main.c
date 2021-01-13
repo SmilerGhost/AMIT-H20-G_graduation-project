@@ -11,27 +11,27 @@
 
 		//// define LED STATE ////
 		
-#define ALL_LED_OFF       '0'
-#define LED0_ON_LED1_OFF   '1'
-#define LED1_ON_LED0_OFF   '2'
-#define ALL_LED_ON        '3'
-#define ALL_LED_TOGGLE         '4'
+#define ALL_LEDS_OFF      '0'
+#define LED0_ON_LED1_OFF  '1'
+#define LED1_ON_LED0_OFF  '2'
+#define ALL_LEDS_ON       '3'
+#define ALL_LEDS_TOGGLE   '4'
 
         //// define orders ////
 		
-#define OFF_ALL \
+#define DIM_ALL_LEDS \
 LED0_OFF(); \
 LED1_OFF();
-#define ON_ALL \
+#define LIGHT_ALL_LEDS \
 LED0_ON(); \
 LED1_ON();
-#define ON_0_OFF_1 \
+#define LIGHT_LED0_LONELY \
 LED0_ON(); \
 LED1_OFF();
-#define OFF_0_ON_1 \
+#define LIGHT_LED1_LONELY \
 LED0_OFF(); \
 LED1_ON();
-#define TOGGLE_ALL \
+#define INVERT_LEDS_LIGHT \
 LED0_TGL(); \
 LED1_TGL();
 
@@ -46,20 +46,20 @@ int main(void)
 		LED_STATE = SPI_ReceiveByte();
 		switch (LED_STATE)
 		{
-			case ALL_LED_OFF:
-			OFF_ALL
+			case ALL_LEDS_OFF:
+			DIM_ALL_LEDS
 			break;
 			case LED0_ON_LED1_OFF:
-			ON_0_OFF_1
+			LIGHT_LED0_LONELY
 			break;
 			case LED1_ON_LED0_OFF:
-			OFF_0_ON_1
+			LIGHT_LED1_LONELY
 			break;
-			case ALL_LED_ON:
-			ON_ALL
+			case ALL_LEDS_ON:
+			LIGHT_ALL_LEDS
 			break;
-			case ALL_LED_TOGGLE:
-			TOGGLE_ALL
+			case ALL_LEDS_TOGGLE:
+			INVERT_LEDS_LIGHT
 			break;
 		}
 	}
